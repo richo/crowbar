@@ -19,5 +19,15 @@
     [statusItem setMenu:statusMenu];
     [statusItem setTitle:@"Crowbar"];
     [statusItem setHighlightMode:YES];
+
+    [self initMenu];
+}
+
+-(void)initMenu{
+    [statusMenu addItem:[[NSMenuItem alloc] initWithTitle:@"Trololol" action:@selector(trolol) keyEquivalent:@""]];
+}
+
+-(void)trolol{
+
 }
 @end
