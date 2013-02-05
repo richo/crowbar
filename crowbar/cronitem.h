@@ -16,13 +16,22 @@ struct cronlist {
 };
 
 FILE* get_cron_file(void);
+struct cronitem* parse_line(char* line);
 struct cronlist* get_cron_items(char** lines);
 
 
 FILE* get_cron_file(void) {
 	wordexp_t exp_result;
-	wordexp(CROWTAB, &exp_result, 0);
-	return fopen(exp_result.we_wordv[0], "r");
+	if (wordexp(CROWTAB, &exp_result, 0) == 0) {
+        return fopen(exp_result.we_wordv[0], "r");
+    } else {
+        perror("wordexp()");
+        exit(1);
+    }
+}
+
+struct cronitem *parse_line(char* line) {
+    return NULL;
 }
 
 #endif
