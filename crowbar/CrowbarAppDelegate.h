@@ -13,6 +13,8 @@
     NSStatusItem * statusItem;
 }
 
+-(void)initMenu;
+
 @property (assign) IBOutlet NSWindow *window;
 
 @end
