@@ -14,6 +14,7 @@
 }
 
 -(void)initMenu;
+-(void)runTaskImmediately:(id)sender;
 
 @property (assign) IBOutlet NSWindow *window;
 

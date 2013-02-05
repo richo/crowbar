@@ -45,7 +45,7 @@
 
                 [statusMenu addItem:[[NSMenuItem alloc]
                                   initWithTitle:titleString
-                                         action:@selector(trolol)
+                                         action:@selector(runTaskImmediately:)
                                   keyEquivalent:@""]];
                 tasks++;
             } else {
@@ -61,7 +61,7 @@
     fclose(fp);
 }
 
--(void)trolol{
+-(void)runTaskImmediately:(id)sender{
 
 }
 @end
