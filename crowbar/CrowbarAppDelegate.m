@@ -7,6 +7,8 @@
 //
 
 #import "CrowbarAppDelegate.h"
+#include <stdio.h>
+#include "cronitem.h"
 
 @implementation CrowbarAppDelegate
 
@@ -24,7 +26,12 @@
 }
 
 -(void)initMenu{
-    [statusMenu addItem:[[NSMenuItem alloc] initWithTitle:@"Trololol" action:@selector(trolol) keyEquivalent:@""]];
+    FILE* fp = get_cron_file();
+    if (fp) {
+        [statusMenu addItem:[[NSMenuItem alloc] initWithTitle:@"crowbar tasks" action:@selector(trolol) keyEquivalent:@""]];
+    } else {
+        [statusMenu addItem:[[NSMenuItem alloc] initWithTitle:@"No crowbar jobs defined" action:nil keyEquivalent:@""]];
+    }
 }
 
 -(void)trolol{
