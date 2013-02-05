@@ -11,6 +11,7 @@
 #include "cronitem.h"
 
 #define LINE_SIZE 1024
+#define MAX_CMD_DISPLAY_SIZE 15
 
 @implementation CrowbarAppDelegate
 
@@ -33,11 +34,24 @@
     FILE* fp = get_cron_file();
     char line[LINE_SIZE];
     if (fp) {
+        struct cronitem *item = malloc(sizeof(struct cronitem));
         while (fgets(line, sizeof(line), fp)) {
-            if (parse_line(line)) {
-                [statusMenu addItem:[[NSMenuItem alloc] initWithTitle:@"crowbar tasks" action:@selector(trolol) keyEquivalent:@""]];
+            if (parse_line(line, item)) {
+                /*  Debugging */
+                fprintf(stderr, "Loaded |%lu| cmd: %s\n", item->period, item->cmd);
+                /* /Debugging */
+                NSString *titleString = [[NSString alloc] initWithBytes:item->cmd length:strlen(item->cmd) encoding:NSUTF8StringEncoding];
+                if ([titleString length] > MAX_CMD_DISPLAY_SIZE) {
+                    titleString = [[titleString substringToIndex: (MAX_CMD_DISPLAY_SIZE - 3)] stringByAppendingString:@"..."];
+                }
+
+                [statusMenu addItem:[[NSMenuItem alloc]
+                      initWithTitle:titleString
+                             action:@selector(trolol)
+                      keyEquivalent:@""]];
                 tasks++;
             } else {
+                fprintf(stderr, "Failed |%lu| cmd: %s\n", item->period, item->cmd);
                 errors++;
             }
         }

@@ -2,12 +2,14 @@
 #define HAS_CRONITEM_H
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include <wordexp.h>
 
 #define CROWTAB "~/.crowtab"
 
 struct cronitem {
     char *cmd;
+    unsigned long period;
 };
 
 struct cronlist {
@@ -16,7 +18,7 @@ struct cronlist {
 };
 
 FILE* get_cron_file(void);
-struct cronitem* parse_line(char* line);
+bool parse_line(char* line, struct cronitem *item);
 struct cronlist* get_cron_items(char** lines);
 
 
@@ -30,8 +32,25 @@ FILE* get_cron_file(void) {
     }
 }
 
-struct cronitem *parse_line(char* line) {
-    return NULL;
+bool parse_line(char* line, struct cronitem* item) {
+    char *lbrack, *rbrack, *newln;
+    if ((lbrack = strchr(line, '(')) &&
+        (rbrack = strchr(line, ')')))
+    {
+        if (newln = strchr(line, '\n'))
+            *newln = '\0';
+
+        *rbrack = '\0';
+        lbrack++;
+        rbrack++;
+
+        if((item->period = atoi(lbrack)) == 0)
+            return false;
+
+        asprintf(&item->cmd, "%s", rbrack);
+        return true;
+    }
+    return false;
 }
 
 #endif
