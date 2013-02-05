@@ -40,7 +40,7 @@
                 fprintf(stderr, "Loaded |%lu| cmd: %s\n", item->period, item->cmd);
                 /* /Debugging */
                 NSString *titleString = [[NSString alloc] initWithBytes:item->display_cmd
-                                                                 length:strlen(item->display_cmd)
+                                                                 length:strnlen(item->display_cmd, MAX_CMD_DISPLAY_SIZE + 1)
                                                                encoding:NSUTF8StringEncoding];
 
                 [statusMenu addItem:[[NSMenuItem alloc]
