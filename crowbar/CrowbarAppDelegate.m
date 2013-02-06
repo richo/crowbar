@@ -53,7 +53,7 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
                 struct cronlist *cs_item = malloc(sizeof(struct cronlist));
                 cs_item->next = NULL;
                 cs_item->cronitem = item;
-                cs_item->menuItem = menuItem;
+                cs_item->menuItem = (__bridge void*)menuItem;
 
                 if (itemList == NULL) {
                     itemHead = itemList = cs_item;
@@ -82,8 +82,8 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
     struct cronlist* i_list = itemList;
 
     while (i_list) {
-        if (sender == i_list->menuItem) {
-            fprintf(stderr, "%s", i_list->cronitem->cmd);
+        if ((__bridge void*)sender == i_list->menuItem) {
+            fprintf(stderr, "Executing: %s\n", i_list->cronitem->cmd);
             break;
         }
         i_list = i_list->next;
