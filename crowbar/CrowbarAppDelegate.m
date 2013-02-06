@@ -34,9 +34,10 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
     int errors = 0;
     FILE* fp = get_cron_file();
     char line[LINE_SIZE];
+    struct cronitem *item;
     if (fp) {
-        struct cronitem *item = malloc(sizeof(struct cronitem));
         while (fgets(line, sizeof(line), fp)) {
+            item = malloc(sizeof(struct cronitem));
             if (parse_line(line, item)) {
                 /*  Debugging */
                 fprintf(stderr, "Loaded |%lu| cmd: %s\n", item->period, item->cmd);
