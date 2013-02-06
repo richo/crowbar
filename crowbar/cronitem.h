@@ -15,7 +15,8 @@ struct cronitem {
 };
 
 struct cronlist {
-    struct cronitem _this;
+    struct cronitem* cronitem;
+    NSMenuItem* menuItem;
     struct cronlist* next;
 };
 

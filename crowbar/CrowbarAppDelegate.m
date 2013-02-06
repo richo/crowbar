@@ -12,6 +12,8 @@
 
 #define LINE_SIZE 1024
 
+struct cronlist *itemList = NULL, *itemHead = NULL;
+
 @implementation CrowbarAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -43,10 +45,25 @@
                                                                  length:strnlen(item->display_cmd, MAX_CMD_DISPLAY_SIZE + 1)
                                                                encoding:NSUTF8StringEncoding];
 
-                [statusMenu addItem:[[NSMenuItem alloc]
+                NSMenuItem *menuItem = [[NSMenuItem alloc]
                                   initWithTitle:titleString
                                          action:@selector(runTaskImmediately:)
-                                  keyEquivalent:@""]];
+                                  keyEquivalent:@""];
+
+                struct cronlist *cs_item = malloc(sizeof(struct cronlist));
+                cs_item->next = NULL;
+                cs_item->cronitem = item;
+                cs_item->menuItem = menuItem;
+
+                if (itemList == NULL) {
+                    itemHead = itemList = cs_item;
+                } else {
+                    itemHead->next = cs_item;
+                    itemHead = cs_item;
+                }
+
+                //menuItem->_extraData = (__bridge id)(item);
+                [statusMenu addItem:menuItem];
                 tasks++;
             } else {
                 fprintf(stderr, "Failed |%lu| cmd: %s\n", item->period, item->cmd);
@@ -62,6 +79,17 @@
 }
 
 -(void)runTaskImmediately:(NSMenuItem*)sender{
+    struct cronlist* i_list = itemList;
 
+    while (i_list) {
+        if (sender == i_list->menuItem) {
+            fprintf(stderr, "%s", i_list->cronitem->cmd);
+            break;
+        }
+        i_list = i_list->next;
+    }
+    if (i_list == NULL) {
+        fprintf(stderr, "Item not found");
+    }
 }
 @end
