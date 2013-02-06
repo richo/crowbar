@@ -61,7 +61,7 @@
     fclose(fp);
 }
 
--(void)runTaskImmediately:(id)sender{
+-(void)runTaskImmediately:(NSMenuItem*)sender{
 
 }
 @end
