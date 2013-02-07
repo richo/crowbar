@@ -75,7 +75,8 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
                 [statusMenu addItem:menuItem];
                 tasks++;
             } else {
-                fprintf(stderr, "Failed |%lu| cmd: %s\n", item->period, item->cmd);
+                fprintf(stderr, "Failed to parse: %s", line);
+                free(item);
                 errors++;
             }
         }
