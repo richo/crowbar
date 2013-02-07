@@ -97,10 +97,16 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
                                                          encoding:NSUTF8StringEncoding];
             NSTask *task = [CrowbarTask new:cmdString];
             task.terminationHandler = ^(NSTask *task) {
+                NSUserNotification *note =  [[NSUserNotification alloc] init];
+                note.title = [[NSString alloc] initWithBytes:i_list->cronitem->display_cmd
+                                                      length:strlen(i_list->cronitem->display_cmd)
+                                                    encoding:NSUTF8StringEncoding];
                 fprintf(stderr, "Command exited. Output:\n");
                 NSData *data = [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
                 NSString *taskOutput = [[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding];
+                note.informativeText = taskOutput;
                 NSLog(@"%@", taskOutput);
+                [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification: note];
             };
             [task launch];
             fprintf(stderr, "Executing: %s\n", i_list->cronitem->cmd);
