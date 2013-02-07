@@ -54,7 +54,7 @@ bool parse_line(char* line, struct cronitem* item) {
         asprintf(&item->cmd, "%s", rbrack);
         if (strlen(item->cmd) > MAX_CMD_DISPLAY_SIZE) {
             item->display_cmd = malloc(MAX_CMD_DISPLAY_SIZE);
-            strncpy(item->display_cmd, item->cmd, MAX_CMD_DISPLAY_SIZE);
+            strncpy(item->display_cmd, item->cmd, MAX_CMD_DISPLAY_SIZE+1);
             ellipses = &(item->display_cmd[MAX_CMD_DISPLAY_SIZE]);
             *ellipses = '\0';
             *ellipses-- = '.';
