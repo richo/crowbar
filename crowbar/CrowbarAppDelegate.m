@@ -90,7 +90,10 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
                                                          encoding:NSUTF8StringEncoding];
             NSTask *task = [CrowbarTask new:cmdString];
             task.terminationHandler = ^(NSTask *task) {
-                fprintf(stderr, "Command exited\n");
+                fprintf(stderr, "Command exited. Output:\n");
+                NSData *data = [[[task standardOutput] fileHandleForReading] readDataToEndOfFile];
+                NSString *taskOutput = [[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding];
+                NSLog(@"%@", taskOutput);
             };
             [task launch];
             fprintf(stderr, "Executing: %s\n", i_list->cronitem->cmd);
