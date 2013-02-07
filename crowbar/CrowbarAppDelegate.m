@@ -7,6 +7,7 @@
 //
 
 #import "CrowbarAppDelegate.h"
+#import "CrowbarTask.h"
 #include <stdio.h>
 #include "cronitem.h"
 
@@ -84,6 +85,14 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
 
     while (i_list) {
         if ((__bridge void*)sender == i_list->menuItem) {
+            NSString *cmdString = [[NSString alloc] initWithBytes:i_list->cronitem->cmd
+                                                           length:strlen(i_list->cronitem->cmd)
+                                                         encoding:NSUTF8StringEncoding];
+            NSTask *task = [CrowbarTask new:cmdString];
+            task.terminationHandler = ^(NSTask *task) {
+                fprintf(stderr, "Command exited\n");
+            };
+            [task launch];
             fprintf(stderr, "Executing: %s\n", i_list->cronitem->cmd);
             break;
         }
