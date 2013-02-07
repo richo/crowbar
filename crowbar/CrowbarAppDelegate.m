@@ -44,7 +44,7 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
                 fprintf(stderr, "Loaded |%lu| cmd: %s\n", item->period, item->cmd);
                 /* /Debugging */
                 NSString *titleString = [[NSString alloc] initWithBytes:item->display_cmd
-                                                                 length:strnlen(item->display_cmd, MAX_CMD_DISPLAY_SIZE + 1)
+                                                                 length:strnlen(item->display_cmd, MAX_CMD_DISPLAY_SIZE)
                                                                encoding:NSUTF8StringEncoding];
 
                 NSMenuItem *menuItem = [[NSMenuItem alloc]
