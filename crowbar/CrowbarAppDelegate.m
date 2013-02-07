@@ -52,10 +52,17 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
                                          action:@selector(runTaskImmediately:)
                                   keyEquivalent:@""];
 
+                NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:item->period
+                                                 target:self
+                                               selector:@selector(runTaskImmediately:)
+                                               userInfo:nil
+                                                repeats:YES];
+
                 struct cronlist *cs_item = malloc(sizeof(struct cronlist));
                 cs_item->next = NULL;
                 cs_item->cronitem = item;
                 cs_item->menuItem = (__bridge void*)menuItem;
+                cs_item->timer = (__bridge void*)timer;
 
                 if (itemList == NULL) {
                     itemHead = itemList = cs_item;
@@ -84,7 +91,7 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
     struct cronlist* i_list = itemList;
 
     while (i_list) {
-        if ((__bridge void*)sender == i_list->menuItem) {
+        if ((__bridge void*)sender == i_list->menuItem || ((__bridge void*)sender == i_list->timer)) {
             NSString *cmdString = [[NSString alloc] initWithBytes:i_list->cronitem->cmd
                                                            length:strlen(i_list->cronitem->cmd)
                                                          encoding:NSUTF8StringEncoding];

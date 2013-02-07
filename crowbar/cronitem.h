@@ -17,6 +17,7 @@ struct cronitem {
 struct cronlist {
     struct cronitem* cronitem;
     void* menuItem;
+    void* timer;
     struct cronlist* next;
 };
 
