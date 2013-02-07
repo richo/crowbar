@@ -80,6 +80,12 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
                 errors++;
             }
         }
+        [statusMenu addItem:[NSMenuItem separatorItem]];
+        [statusMenu addItem:[[NSMenuItem alloc]
+                                  initWithTitle:@"Quit"
+                                         action:@selector(terminate:)
+                                  keyEquivalent:@""]];
+
 
     }
     if (tasks == 0) {
