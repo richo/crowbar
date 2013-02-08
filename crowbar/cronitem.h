@@ -69,8 +69,8 @@ bool parse_line(char* line, struct cronitem* item) {
                 strncpy(item->display_cmd, item->cmd, MAX_CMD_DISPLAY_SIZE+1);
                 ellipses = &(item->display_cmd[MAX_CMD_DISPLAY_SIZE]);
                 *ellipses = '\0';
-                *ellipses-- = '.';
-                *ellipses-- = '.';
+                *--ellipses = '.';
+                *--ellipses = '.';
             } else {
                 item->display_cmd = item->cmd; // TODO Is using the same buffer here always ok?
             }
