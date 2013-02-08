@@ -24,7 +24,12 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
 -(void)awakeFromNib{
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:statusMenu];
-    [statusItem setTitle:@"Crowbar"];
+
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:@"crowbar" ofType:@"tif"];
+    NSImage *menuIcon= [[NSImage alloc] initWithContentsOfFile:path];
+
+    [statusItem setImage:menuIcon];
     [statusItem setHighlightMode:YES];
 
     [self initMenu];
