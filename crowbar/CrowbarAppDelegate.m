@@ -80,18 +80,16 @@ struct cronlist *itemList = NULL, *itemHead = NULL;
                 errors++;
             }
         }
-        [statusMenu addItem:[NSMenuItem separatorItem]];
-        [statusMenu addItem:[[NSMenuItem alloc]
-                                  initWithTitle:@"Quit"
-                                         action:@selector(terminate:)
-                                  keyEquivalent:@""]];
-
-
     }
     if (tasks == 0) {
         [statusMenu addItem:[[NSMenuItem alloc] initWithTitle:@"No crowbar jobs defined" action:nil keyEquivalent:@""]];
     }
     fclose(fp);
+    [statusMenu addItem:[NSMenuItem separatorItem]];
+    [statusMenu addItem:[[NSMenuItem alloc]
+          initWithTitle:@"Quit"
+                 action:@selector(terminate:)
+          keyEquivalent:@""]];
 }
 
 -(void)runTaskImmediately:(NSMenuItem*)sender{
