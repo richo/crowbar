@@ -23,7 +23,6 @@ struct cronlist {
 
 FILE* get_cron_file(void);
 bool parse_line(char* line, struct cronitem *item);
-struct cronlist* get_cron_items(char** lines);
 
 
 FILE* get_cron_file(void) {
