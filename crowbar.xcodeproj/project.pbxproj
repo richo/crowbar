@@ -17,6 +17,7 @@
 		7B17C4C416BFD39200F8E4DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B17C4A416BFD39100F8E4DA /* Cocoa.framework */; };
 		7B17C4CC16BFD39200F8E4DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B17C4CA16BFD39200F8E4DA /* InfoPlist.strings */; };
 		7B17C4CF16BFD39200F8E4DA /* crowbarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B17C4CE16BFD39200F8E4DA /* crowbarTests.m */; };
+		7B2819CE16C8B8D40047A702 /* CrowbarTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2819CD16C8B8D40047A702 /* CrowbarTask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		7B17C4CB16BFD39200F8E4DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B17C4CD16BFD39200F8E4DA /* crowbarTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crowbarTests.h; sourceTree = "<group>"; };
 		7B17C4CE16BFD39200F8E4DA /* crowbarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = crowbarTests.m; sourceTree = "<group>"; };
+		7B2819CC16C8B8CB0047A702 /* CrowbarTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrowbarTask.h; sourceTree = "<group>"; };
+		7B2819CD16C8B8D40047A702 /* CrowbarTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrowbarTask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +118,9 @@
 			isa = PBXGroup;
 			children = (
 				7B17C4B616BFD39100F8E4DA /* CrowbarAppDelegate.h */,
+				7B2819CC16C8B8CB0047A702 /* CrowbarTask.h */,
 				7B17C4B716BFD39100F8E4DA /* CrowbarAppDelegate.m */,
+				7B2819CD16C8B8D40047A702 /* CrowbarTask.m */,
 				7B17C4B916BFD39200F8E4DA /* MainMenu.xib */,
 				7B17C4AB16BFD39100F8E4DA /* Supporting Files */,
 			);
@@ -264,6 +269,7 @@
 			files = (
 				7B17C4B116BFD39100F8E4DA /* main.m in Sources */,
 				7B17C4B816BFD39100F8E4DA /* CrowbarAppDelegate.m in Sources */,
+				7B2819CE16C8B8D40047A702 /* CrowbarTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +459,7 @@
 				7B17C4D416BFD39200F8E4DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7B17C4D516BFD39200F8E4DA /* Build configuration list for PBXNativeTarget "crowbarTests" */ = {
 			isa = XCConfigurationList;
@@ -461,6 +468,7 @@
 				7B17C4D716BFD39200F8E4DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
